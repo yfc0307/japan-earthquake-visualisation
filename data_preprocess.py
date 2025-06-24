@@ -19,8 +19,4 @@ df["Time"] = df["Time"].map(parse_japanese_datetime)
 
 df["Magnitude"] = pd.to_numeric(df["Magnitude"], errors="coerce").fillna(0)
 
-df["Seismic Intensity"] = pd.to_numeric(
-    df["Seismic Intensity"], errors="coerce"
-).fillna(0)
-
-df.to_excel("jp_eqhist_data_filtered.xlsx", index=False)
+df.to_excel("jp_eqhist_data_filtered.xlsx", index=False, sheet_name="Data")
