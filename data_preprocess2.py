@@ -35,5 +35,10 @@ df = pd.read_excel(source, sheet_name="Data")
 # Convert "Seismic Intensity" column to numeric
 df["Seismic Intensity"] = pd.to_numeric(df["Seismic Intensity"], errors="coerce")
 
-# Save the DataFrame back to the Excel file
-df.to_excel(source, index=False, sheet_name="Data")
+# Write the updated DataFrame to the "Data" sheet
+for i, row in enumerate(df.itertuples(index=False), start=2):  # Start from row 2 (assuming row 1 is the header)
+    for j, value in enumerate(row, start=1):  # Start from column 1
+        sheet.cell(row=i, column=j, value=value)
+
+# Save the workbook
+wb.save("jp_eqhist_data_filtered.xlsx")
