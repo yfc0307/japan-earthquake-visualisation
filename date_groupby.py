@@ -20,6 +20,17 @@ df["Day"] = df["Time"].dt.day
 # Group by year and seismic intensity, count occurrences
 result_year = df.groupby(["Year", "Seismic Intensity"]).size().unstack(fill_value=0)
 
+import matplotlib.pyplot as plt
+
+# Plot stacked bar chart for result_year
+ax = result_year.plot(kind="bar", stacked=True, figsize=(12, 7))
+plt.title("Number of Earthquake in Japan by Year")
+plt.xlabel("Year")
+plt.ylabel("Number of Earthquakes")
+plt.legend(title="Seismic Intensity")
+plt.tight_layout()
+plt.show()
+
 # Write to a new sheet in the same Excel file
 with pd.ExcelWriter(
     source, engine="openpyxl", mode="a", if_sheet_exists="replace"
